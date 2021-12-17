@@ -25,3 +25,10 @@ model.add(layers.Flatten())
 model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(10))
 print(model.summary())
+
+
+# training:
+print('### training...')
+model.compile(optimizer='adam', loss=losses.SparseCategoricalCrossentropy(from_logits=True),metrics=['accuracy'])
+model.fit(trainImages, trainLabels, epochs=1, validation_data=(testImages, testLables))
+model.save(os.path.dirname(os.path.abspath(__file__))+'\\myModel')
