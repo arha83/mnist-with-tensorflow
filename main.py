@@ -38,12 +38,12 @@ model= models.load_model(os.path.join(os.path.dirname(os.path.abspath(__file__))
 print('### training...')
 model.compile(optimizer='adam', loss=losses.SparseCategoricalCrossentropy(from_logits=True),metrics=['accuracy'])
 model.fit(trainImages, trainLabels, epochs=3, validation_data=(testImages, testLables))
-model.save(os.path.dirname(os.path.abspath(__file__))+'\\myModel')
+model.save(os.path.dirname(os.path.join(os.path.abspath(__file__)),'myModel'))
 
 # predicting:
 print('### predicting...')
 for i in range(10):
-    image= cv.imread(os.path.dirname(os.path.abspath(__file__))+f'\\test images\\{str(i)}.png')
+    image= cv.imread(os.path.dirname(os.path.join((os.path.abspath(__file__)),f'test images/{str(i)}.png'))
     image= cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     pre= np.expand_dims(image, 0)
     predictions= model.predict([pre])
